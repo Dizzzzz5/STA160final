@@ -1,0 +1,602 @@
+library(readxl)
+###### Accidents
+Accidents <- read_xlsx("Accidents.xlsx")
+
+Accidents = Accidents[6:36,]
+Accidents[, 9:11] = lapply(Accidents[, 9:11], function(x) 
+  as.numeric(ifelse(x == "N/A", NA, x)))
+Accidents[,2:11] = scale(Accidents[,2:11])
+
+
+
+##### Earnings
+Earnings = read_xlsx("Earnings.xlsx")
+Earnings = Earnings[7:40,]
+Earnings[,2:11] = lapply(Earnings[,2:11], function(y) 
+  as.numeric(ifelse(y == "N/A", NA, y)))
+Earnings[,2:11] = scale(Earnings[,2:11])
+
+
+##### Career Development
+CD = read_xlsx("Career Development.xlsx")
+CD = CD[4:38,]
+CD[,2:11] = lapply(CD[,2:11], function(z)
+  as.numeric(ifelse(z == "N/A", NA, z)))
+CD[,2:11] = scale(CD[,2:11])
+
+
+##### Work Relationship
+WR = read_xlsx("Work Relationship.xlsx")
+WR = WR[10:45,]
+WR[,2:10] = lapply(WR[,2:10], function(x)
+  as.numeric(ifelse(x == "N/A", NA, x)))
+WR[,2:10] = scale(WR[,2:10])
+
+
+##### GDP Compensation of workers
+GDP = read_xlsx("GDP.xlsx")
+GDP = GDP[9:47,]
+GDP[,2:11] = lapply(GDP[,2:11], function(x)
+  as.numeric(ifelse(x == "N/A", NA, x)))
+GDP[,2:11] = scale(GDP[,2:11])
+
+
+##### Job Fit
+JF = read_xlsx("Job Fit.xlsx")
+JF = JF[4:38,]
+JF[,2:11] = lapply(JF[,2:11], function(x)
+  as.numeric(ifelse(x == "N/A", NA, x)))
+JF[,2:11] = scale(JF[,2:11])
+
+
+##### Unemployment Rates
+UR = read_xlsx("Unemployment.xlsx")
+UR = UR[4:37,]
+UR[,2:11] = lapply(UR[,2:11], function(x)
+  as.numeric(ifelse(x == "N/A", NA, x)))
+UR[,2:11] = scale(UR[,2:11])
+
+#### Belgium
+temp1 = Accidents[1, "2022"]
+temp2 = Earnings[1, "2022"]
+temp3 = CD[1, "2022"]
+temp4 = WR[1, "2022"]
+temp5 = GDP[1, "2022"]
+temp6 = JF[1, "2022"]
+temp7 = UR[1, "2022"]
+
+Belgium1 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Belgium2 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Belgium3 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Belgium4 = t(as.data.frame(c(NA, temp2, temp3, temp4, temp5, temp6, temp7)))
+Belgium5 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+
+colnames(Belgium1) = c("2019")
+rownames(Belgium1) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+sum(Belgium1)
+
+colnames(Belgium2) = c("2020")
+rownames(Belgium2) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+sum(Belgium2)
+
+colnames(Belgium3) = c("2021")
+rownames(Belgium3) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+sum(Belgium3)
+
+colnames(Belgium4) = c("2022")
+rownames(Belgium4) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+sum(Belgium4, na.rm = TRUE)
+
+colnames(Belgium5) = c("2018")
+rownames(Belgium5) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+BelgiumDF = cbind(Belgium5, Belgium1, Belgium2, Belgium3, Belgium4)
+BelgiumDF["Accidents", ] = -1 * BelgiumDF["Accidents", ]
+BelgiumDF["Unempl", ] = -1 * BelgiumDF["Unempl", ]
+BelgiumDF["WorkRel", ] = -1 * BelgiumDF["WorkRel", ]
+
+
+
+
+sum(BelgiumDF[,"2019"])
+sum(BelgiumDF[,"2020"])
+sum(BelgiumDF[,"2021"])
+sum(BelgiumDF[,"2022"], na.rm = TRUE)
+
+
+
+#### Germany
+temp1 = Accidents[5, "2022"]
+temp2 = Earnings[5, "2022"]
+temp3 = CD[5, "2022"]
+temp4 = WR[5, "2022"]
+temp5 = GDP[5, "2022"]
+temp6 = JF[5, "2022"]
+temp7 = UR[5, "2022"]
+
+Germany1 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Germany2 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Germany3 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Germany4 = t(as.data.frame(c(NA, temp2, temp3, temp4, temp5, temp6, temp7)))
+Germany5 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+
+
+
+colnames(Germany1) = c("2019")
+rownames(Germany1) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+sum(Germany1)
+
+colnames(Germany2) = c("2020")
+rownames(Germany2) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+sum(Germany2)
+
+colnames(Germany3) = c("2021")
+rownames(Germany3) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+sum(Germany3)
+
+colnames(Germany4) = c("2022")
+rownames(Germany4) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+sum(Germany4, na.rm = TRUE)
+
+colnames(Germany5) = c("2018")
+rownames(Germany5) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+GermanyDF = cbind(Germany5, Germany1, Germany2, Germany3, Germany4)
+GermanyDF["Accidents", ] = -1 * GermanyDF["Accidents", ]
+GermanyDF["Unempl", ] = -1 * GermanyDF["Unempl", ]
+GermanyDF["WorkRel", ] = -1 * GermanyDF["WorkRel", ]
+
+
+sum(GermanyDF[,"2019"])
+sum(GermanyDF[,"2020"])
+sum(GermanyDF[,"2021"])
+
+
+##### Ireland
+temp1 = Accidents[7, "2021"]
+temp2 = Earnings[7, "2022"]
+temp3 = CD[7, "2022"]
+temp4 = WR[7, "2022"]
+temp5 = GDP[7, "2022"]
+temp6 = JF[7, "2022"]
+temp7 = UR[7, "2022"]
+
+Ireland1 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Ireland2 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Ireland3 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Ireland4 = t(as.data.frame(c(NA, temp2, temp3, temp4, temp5, temp6, temp7)))
+Ireland5 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+
+
+
+colnames(Ireland1) = c("2019")
+rownames(Ireland1) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+
+colnames(Ireland2) = c("2020")
+rownames(Ireland2) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+
+colnames(Ireland3) = c("2021")
+rownames(Ireland3) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+colnames(Ireland4) = c("2022")
+rownames(Ireland4) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+colnames(Ireland5) = c("2018")
+rownames(Ireland5) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+IrelandDF = cbind(Ireland5, Ireland1, Ireland2, Ireland3, Ireland4)
+IrelandDF["Accidents", ] = -1 * IrelandDF["Accidents", ]
+IrelandDF["Unempl", ] = -1 * IrelandDF["Unempl", ]
+IrelandDF["WorkRel", ] = -1 * IrelandDF["WorkRel", ]
+
+sum(IrelandDF[,"2019"])
+sum(IrelandDF[,"2020"])
+sum(IrelandDF[,"2021"])
+
+
+##### Spain
+temp1 = Accidents[9, "2022"]
+temp2 = Earnings[9, "2022"]
+temp3 = CD[9, "2022"]
+temp4 = WR[9, "2022"]
+temp5 = GDP[9, "2022"]
+temp6 = JF[9, "2022"]
+temp7 = UR[9, "2022"]
+
+Spain1 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Spain2 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Spain3 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Spain4 = t(as.data.frame(c(NA, temp2, temp3, temp4, temp5, temp6, temp7)))
+Spain5 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+
+
+colnames(Spain1) = c("2019")
+rownames(Spain1) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+
+colnames(Spain2) = c("2020")
+rownames(Spain2) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+
+colnames(Spain3) = c("2021")
+rownames(Spain3) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+colnames(Spain4) = c("2022")
+rownames(Spain4) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+colnames(Spain5) = c("2018")
+rownames(Spain5) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+SpainDF = cbind(Spain5, Spain1, Spain2, Spain3, Spain4)
+SpainDF["Accidents", ] = -1 * SpainDF["Accidents", ]
+SpainDF["Unempl", ] = -1 * SpainDF["Unempl", ]
+SpainDF["WorkRel", ] = -1 * SpainDF["WorkRel", ]
+
+sum(SpainDF[,"2019"])
+sum(SpainDF[,"2020"])
+sum(SpainDF[,"2021"])
+
+
+##### France
+temp1 = Accidents[10, "2021"]
+temp2 = Earnings[10, "2022"]
+temp3 = CD[10, "2022"]
+temp4 = WR[10, "2022"]
+temp5 = GDP[10, "2022"]
+temp6 = JF[10, "2022"]
+temp7 = UR[10, "2022"]
+
+France1 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+France2 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+France3 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+France4 = t(as.data.frame(c(NA, temp2, temp3, temp4, temp5, temp6, temp7)))
+France5 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+
+
+
+colnames(France1) = c("2019")
+rownames(France1) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+
+colnames(France2) = c("2020")
+rownames(France2) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+
+colnames(France3) = c("2021")
+rownames(France3) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+colnames(France4) = c("2022")
+rownames(France4) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+colnames(France5) = c("2018")
+rownames(France5) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+
+FranceDF = cbind(France5, France1, France2, France3, France4)
+FranceDF["Accidents", ] = -1 * FranceDF["Accidents", ]
+FranceDF["Unempl", ] = -1 * FranceDF["Unempl", ]
+FranceDF["WorkRel", ] = -1 * FranceDF["WorkRel", ]
+
+sum(FranceDF[,"2019"])
+sum(FranceDF[,"2020"])
+sum(FranceDF[,"2021"])
+
+
+##### Italy
+temp1 = Accidents[12, "2022"]
+temp2 = Earnings[12, "2022"]
+temp3 = CD[12, "2022"]
+temp4 = WR[12, "2022"]
+temp5 = GDP[12, "2022"]
+temp6 = JF[12, "2022"]
+temp7 = UR[12, "2022"]
+
+Italy1 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Italy2 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Italy3 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Italy4 = t(as.data.frame(c(NA, temp2, temp3, temp4, temp5, temp6, temp7)))
+Italy5 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+
+
+colnames(Italy1) = c("2019")
+rownames(Italy1) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+
+colnames(Italy2) = c("2020")
+rownames(Italy2) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+
+colnames(Italy3) = c("2021")
+rownames(Italy3) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+colnames(Italy4) = c("2022")
+rownames(Italy4) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+colnames(Italy5) = c("2018")
+rownames(Italy5) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+ItalyDF = cbind(Italy5, Italy1, Italy2, Italy3, Italy4)
+ItalyDF["Accidents", ] = -1 * ItalyDF["Accidents", ]
+ItalyDF["Unempl", ] = -1 * ItalyDF["Unempl", ]
+ItalyDF["WorkRel", ] = -1 * ItalyDF["WorkRel", ]
+
+
+sum(ItalyDF[,"2019"])
+sum(ItalyDF[,"2020"])
+sum(ItalyDF[,"2021"])
+
+
+##### Austria
+temp1 = Accidents[20, "2021"]
+temp2 = Earnings[20, "2022"]
+temp3 = CD[20, "2022"]
+temp4 = WR[20, "2022"]
+temp5 = GDP[20, "2022"]
+temp6 = JF[20, "2022"]
+temp7 = UR[20, "2022"]
+
+Austria1 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Austria2 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Austria3 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Austria4 = t(as.data.frame(c(NA, temp2, temp3, temp4, temp5, temp6, temp7)))
+Austria5 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+
+
+
+colnames(Austria1) = c("2019")
+rownames(Austria1) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+
+colnames(Austria2) = c("2020")
+rownames(Austria2) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+
+colnames(Austria3) = c("2021")
+rownames(Austria3) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+colnames(Austria4) = c("2022")
+rownames(Austria4) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+colnames(Austria5) = c("2018")
+rownames(Austria5) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+AustriaDF = cbind(Austria5, Austria1, Austria2, Austria3, Austria4)
+AustriaDF["Accidents", ] = -1 * AustriaDF["Accidents", ]
+AustriaDF["Unempl", ] = -1 * AustriaDF["Unempl", ]
+AustriaDF["WorkRel", ] = -1 * AustriaDF["WorkRel", ]
+
+
+sum(AustriaDF[,"2019"])
+sum(AustriaDF[,"2020"])
+sum(AustriaDF[,"2021"])
+
+
+##### Poland
+temp1 = Accidents[21, "2021"]
+temp2 = Earnings[21, "2022"]
+temp3 = CD[21, "2022"]
+temp4 = WR[21, "2022"]
+temp5 = GDP[21, "2022"]
+temp6 = JF[21, "2022"]
+temp7 = UR[21, "2022"]
+
+Poland1 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Poland2 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Poland3 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Poland4 = t(as.data.frame(c(NA, temp2, temp3, temp4, temp5, temp6, temp7)))
+Poland5 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+
+colnames(Poland1) = c("2019")
+rownames(Poland1) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+
+colnames(Poland2) = c("2020")
+rownames(Poland2) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+
+colnames(Poland3) = c("2021")
+rownames(Poland3) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+colnames(Poland4) = c("2022")
+rownames(Poland4) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+colnames(Poland5) = c("2018")
+rownames(Poland5) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+PolandDF = cbind(Poland5, Poland1, Poland2, Poland3, Poland4)
+PolandDF["Accidents", ] = -1 * PolandDF["Accidents", ]
+PolandDF["Unempl", ] = -1 * PolandDF["Unempl", ]
+PolandDF["WorkRel", ] = -1 * PolandDF["WorkRel", ]
+
+sum(PolandDF[,"2019"])
+sum(PolandDF[,"2020"])
+sum(PolandDF[,"2021"])
+
+
+##### Netherlands
+temp1 = Accidents[19, "2021"]
+temp2 = Earnings[19, "2022"]
+temp3 = CD[19, "2022"]
+temp4 = WR[19, "2022"]
+temp5 = GDP[19, "2022"]
+temp6 = JF[19, "2022"]
+temp7 = UR[19, "2022"]
+
+Netherlands1 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Netherlands2 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Netherlands3 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Netherlands4 = t(as.data.frame(c(NA, temp2, temp3, temp4, temp5, temp6, temp7)))
+Netherlands5 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+
+
+
+colnames(Netherlands1) = c("2019")
+rownames(Netherlands1) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+
+colnames(Netherlands2) = c("2020")
+rownames(Netherlands2) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+
+colnames(Netherlands3) = c("2021")
+rownames(Netherlands3) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+colnames(Netherlands4) = c("2022")
+rownames(Netherlands4) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+colnames(Netherlands5) = c("2018")
+rownames(Netherlands5) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+NetherlandsDF = cbind(Netherlands5, Netherlands1, Netherlands2, Netherlands3, Netherlands4)
+NetherlandsDF["Accidents", ] = -1 * NetherlandsDF["Accidents", ]
+NetherlandsDF["Unempl", ] = -1 * NetherlandsDF["Unempl", ]
+NetherlandsDF["WorkRel", ] = -1 * NetherlandsDF["WorkRel", ]
+
+sum(NetherlandsDF[,"2019"])
+sum(NetherlandsDF[,"2020"])
+sum(NetherlandsDF[,"2021"])
+
+
+##### Romania
+temp1 = Accidents[23, "2021"]
+temp2 = Earnings[23, "2022"]
+temp3 = CD[23, "2022"]
+temp4 = WR[23, "2022"]
+temp5 = GDP[23, "2022"]
+temp6 = JF[23, "2022"]
+temp7 = UR[23, "2022"]
+
+Romania1 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Romania2 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Romania3 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+Romania4 = t(as.data.frame(c(NA, temp2, temp3, temp4, temp5, temp6, temp7)))
+Romania5 = t(as.data.frame(c(temp1, temp2, temp3, temp4, temp5, temp6, temp7)))
+
+
+
+colnames(Romania1) = c("2019")
+rownames(Romania1) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+
+colnames(Romania2) = c("2020")
+rownames(Romania2) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+
+colnames(Romania3) = c("2021")
+rownames(Romania3) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+colnames(Romania4) = c("2022")
+rownames(Romania4) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+colnames(Romania5) = c("2018")
+rownames(Romania5) = c("Accidents", "Earnings", "CareerDev", "WorkRel", "Comp", "JobFit", "Unempl")
+
+RomaniaDF = cbind(Romania5, Romania1, Romania2, Romania3, Romania4)
+RomaniaDF["Accidents", ] = -1 * RomaniaDF["Accidents", ]
+RomaniaDF["Unempl", ] = -1 * RomaniaDF["Unempl", ]
+RomaniaDF["WorkRel", ] = -1 * RomaniaDF["WorkRel", ]
+
+sum(RomaniaDF[,"2019"])
+sum(RomaniaDF[,"2020"])
+sum(RomaniaDF[,"2021"])
+
+DF = list(BelgiumDF = BelgiumDF, GermanyDF = GermanyDF, IrelandDF = IrelandDF, 
+          SpainDF = SpainDF, FranceDF = FranceDF, ItalyDF = ItalyDF,
+       NetherlandsDF = NetherlandsDF, AustriaDF = AustriaDF, PolandDF = PolandDF,
+       RomaniaDF = RomaniaDF)
+
+
+
+sums_per_country <- sapply(DF, function(x) colSums(x[, -ncol(x)-1], na.rm = TRUE))
+
+
+#### HeatMAPS
+HMaccidents = NULL
+HMaccidents = rbind(BelgiumDF[1,], GermanyDF[1,], IrelandDF[1,],
+                    SpainDF[1,], FranceDF[1,], ItalyDF[1,],
+                    NetherlandsDF[1,], AustriaDF[1,], PolandDF[1,], RomaniaDF[1,])
+
+rownames(HMaccidents) = c("Belgium", "Germany", "Ireland", "Spain", "France",
+                          "Italy", "Netherlands", "Austria", "Poland", "Romania")
+
+heatmap(HMaccidents[,1:4], Rowv = NA, Colv = NA)
+
+
+HMearnings = rbind(BelgiumDF[2,], GermanyDF[2,], IrelandDF[2,],
+                                 SpainDF[2,], FranceDF[2,], ItalyDF[2,],
+                                 NetherlandsDF[2,], AustriaDF[2,], PolandDF[2,], RomaniaDF[2,])
+rownames(HMearnings) = c("Belgium", "Germany", "Ireland", "Spain", "France",
+                          "Italy", "Netherlands", "Austria", "Poland", "Romania")
+heatmap(HMearnings, Rowv = NA, Colv = NA)
+
+
+
+HMCareerDev = rbind(BelgiumDF[3,], GermanyDF[3,], IrelandDF[3,],
+                   SpainDF[3,], FranceDF[3,], ItalyDF[3,],
+                   NetherlandsDF[3,], AustriaDF[3,], PolandDF[3,], RomaniaDF[3,])
+rownames(HMCareerDev) = c("Belgium", "Germany", "Ireland", "Spain", "France",
+                         "Italy", "Netherlands", "Austria", "Poland", "Romania")
+
+heatmap(HMCareerDev, Rowv = NA, Colv = NA)
+
+
+HMWorkRel = rbind(BelgiumDF[4,], GermanyDF[4,], IrelandDF[4,],
+                    SpainDF[4,], FranceDF[4,], ItalyDF[4,],
+                    NetherlandsDF[4,], AustriaDF[4,], PolandDF[4,], RomaniaDF[4,])
+rownames(HMWorkRel) = c("Belgium", "Germany", "Ireland", "Spain", "France",
+                          "Italy", "Netherlands", "Austria", "Poland", "Romania")
+heatmap(HMWorkRel, Rowv = NA, Colv = NA)
+
+
+HMComp = rbind(BelgiumDF[5,], GermanyDF[5,], IrelandDF[5,],
+                  SpainDF[5,], FranceDF[5,], ItalyDF[5,],
+                  NetherlandsDF[5,], AustriaDF[5,], PolandDF[5,], RomaniaDF[5,])
+rownames(HMComp) = c("Belgium", "Germany", "Ireland", "Spain", "France",
+                        "Italy", "Netherlands", "Austria", "Poland", "Romania")
+heatmap(HMComp, Rowv = NA, Colv = NA)
+
+
+HMJobFit = rbind(BelgiumDF[6,], GermanyDF[6,], IrelandDF[6,],
+               SpainDF[6,], FranceDF[6,], ItalyDF[6,],
+               NetherlandsDF[6,], AustriaDF[6,], PolandDF[6,], RomaniaDF[6,])
+rownames(HMJobFit) = c("Belgium", "Germany", "Ireland", "Spain", "France",
+                     "Italy", "Netherlands", "Austria", "Poland", "Romania")
+heatmap(HMJobFit, Rowv = NA, Colv = NA)
+
+HMUnempl = rbind(BelgiumDF[7,], GermanyDF[7,], IrelandDF[7,],
+                 SpainDF[7,], FranceDF[7,], ItalyDF[7,],
+                 NetherlandsDF[7,], AustriaDF[7,], PolandDF[7,], RomaniaDF[7,])
+rownames(HMUnempl) = c("Belgium", "Germany", "Ireland", "Spain", "France",
+                       "Italy", "Netherlands", "Austria", "Poland", "Romania")
+heatmap(HMUnempl, Rowv = NA, Colv = NA)
+
+heatmap(sums_per_country, Rowv = NA, Colv = NA)
+
+heatmap(ItalyDF, Rowv = NA, Colv = NA)
+
+heatmap(AustriaDF, Rowv = NA, Colv = NA)
+
+
+library(ggplot2)
+
+sums_per_country_df <- as.data.frame(sums_per_country)
+
+sums_per_country_df$Year <- row.names(sums_per_country_df)
+
+sums_per_country_long <- tidyr::gather(sums_per_country_df, key = "Country", value = "Score", -Year)
+
+ggplot(sums_per_country_long, aes(x = Year, y = Score, color = Country, group = Country)) +
+  geom_line() +
+  labs(title = "Job Satisfaction Scores Over Years",
+       x = "Year",
+       y = "Job Satisfaction Score") +
+  scale_y_continuous(limits = c(-10, 10)) +
+  theme_minimal()
+
+
+
+
+
+
